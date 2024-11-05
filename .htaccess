@@ -1,0 +1,24 @@
+RewriteEngine On
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+
+RewriteRule ^(.*)$ $1.php
+
+RewriteCond %{REQUEST_METHOD} !POST
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s([^.]+)\.php [NC]
+RewriteRule ^ %1 [R=302,L,NE]
+
+RewriteCond %{HTTP_HOST} ^www\.radianbooks\.in [NC]
+RewriteRule ^(.*)$ https://radianbooks.in/$1 [R=301,L]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-1
+
+RewriteRule ^blogs/([^/\.]+) blog.php?blog_url=$1
+# RewriteRule ^find-doctor/([^/\.]+) find-doctor.php?url_doctor=$1
+RewriteRule ^shop/([^/\.]+) product.php?url=$1
+RewriteRule ^category/([^/\.]+) shop.php?category=$1
+# RewriteRule ^category/([^/]+)/([^/]+)$ find-doctor.php?id=$1&location=$2 [L]
+
